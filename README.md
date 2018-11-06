@@ -2,6 +2,8 @@
 
 Este ejemplo muestra cómo hacer uso de gRPC para establecer comunicaciones sincrónicas entre el cliente y servidor, y a su vez, como este último puede enviar notificaciones hacia los clientes activos, mediante el uso de "stream".
 
+### Preparación de ambiente:
+
 - Tener corriendo mongodb sobre la máquina, y creado una base de datos llamada "grpc" y además tener creado la collection "items", con item que sigan la siguente estructura:
 
 {

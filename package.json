@@ -1,10 +1,11 @@
 {
   "name": "grpcexample",
+  "author": "Pablo Durán",
+  "license": "MIT",
   "version": "1.0.0",
   "description": "Notificación y consulta de items",
-  "main": "server.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+  "main": "server/server.js",
+  "scripts": {    
     "start": "node --expose-http2 server.js"
   },
   "keywords": [
@@ -12,9 +13,7 @@
     "protocol",
     "buffers",
     "rpc"
-  ],
-  "author": "Tulio Castro",
-  "license": "MIT",
+  ],  
   "dependencies": {
     "@grpc/proto-loader": "^0.3.0",
     "grpc": "^1.13.0",

@@ -74,7 +74,7 @@ function consultaItem(call, callback) {
 }
 
 //Nuevo consumidor registrado
-function join(consumer, callback) {
+function join(consumer) {
   consumers.push(consumer);
   console.log('Nuevo consumidor:'+consumer.request.name);
 }

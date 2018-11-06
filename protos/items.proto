@@ -1,0 +1,32 @@
+//Proto version 3.
+syntax = "proto3"; 
+package cencosud;
+
+service Items {
+    //Define que el consumidor podrá recibir constamente mensajes del server.
+    rpc join(Consumer) returns (stream Message){}
+
+    //Define que la comunicación entre servidor y cliente es de manera sincronica. 
+    //El consumidor gatilla una pregunta y server envía la respuesta a su consulta.
+    rpc consultaItem(Id) returns (Message){}
+
+    /****************************
+    Existen más estrategias de comunicación que son definidas en la siguiente URL:
+    https://grpc.io/docs/tutorials/basic/node.html
+    *****************************/
+}
+
+message Message {
+    string _id = 1;
+    int32 items_id = 2;
+    string name = 3;
+    string status = 4;    
+}
+
+message Id{
+    string id = 1;
+}
+
+message Consumer{
+    string name = 1;
+}

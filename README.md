@@ -4,7 +4,7 @@ Este ejemplo muestra cómo hacer uso de gRPC para establecer comunicaciones sinc
 
 **Preparación de ambiente:**
 
-- Tener corriendo mongodb sobre la máquina, y creado una base de datos llamada "grpc" y además tener creado la collection "items", con item que sigan la siguente estructura:
+- Tener corriendo mongodb sobre la máquina, y haber creado una base de datos llamada "grpc" y además una collection "items". Los documentos deben tener la siguiente estructura:
 
 {
     "items_id" : 1,
@@ -13,6 +13,8 @@ Este ejemplo muestra cómo hacer uso de gRPC para establecer comunicaciones sinc
 }
 
 Donde status, puede tener los "ok" y "nok". El primer valor, significa que el producto ya fue enviado en alguna ocación a algún cliente conectado, y el segundo, es el valor que un item debe tener para poder ser notificado como un nuevo producto hacia los consumidores.
+
+Luego de tener lo anterior OK, se procede con lo siguiente:
 
 - Instalación de dependencias:
     ``$ npm install``

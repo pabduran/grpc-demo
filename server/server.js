@@ -56,10 +56,10 @@ let proto = grpc.loadPackageDefinition(
 server.addService(proto.cencosud.Items.service, { join: join, consultaItem: consultaItem });
 
 //Método sincrónico que consulta un Items en particular.
-function consultaItem(call, callback) {  
+function consultaItem(message, callback) {  
   try {
     const collection = db.collection(collectionName);
-    collection.find({'items_id':Number(call.request.id)}).toArray(function(err, items) {
+    collection.find({'items_id':Number(message.request.id)}).toArray(function(err, items) {
         assert.equal(err, null);
         console.log(items);  
         if(items.length>0)    
@@ -79,15 +79,6 @@ function join(consumer) {
   console.log('Nuevo consumidor:'+consumer.request.name);
 }
 
-//Cuando se detecta un nuevo evento, se envía a todos los consumidores conectados.
-//En este caso la variable event contiene el Item que se desea informar.
-function notifyEvent(event) {
-  console.log('Notificando un nuevo Evento => '+JSON.stringify(event));
-  consumers.forEach(consumer => {
-    consumer.write(event);
-  });
-}
-
 //Polling hacia mongodb
 setInterval(function(){
   console.log('Nueva Lectura!!!');
@@ -101,6 +92,15 @@ setInterval(function(){
       }        
   });
 }, 5000);
+
+//Cuando se detecta un nuevo evento, se envía a todos los consumidores conectados.
+//En este caso la variable event contiene el Item que se desea informar.
+function notifyEvent(item) {
+  console.log('Notificando un nuevo Evento => '+JSON.stringify(item));
+  consumers.forEach(consumer => {
+    consumer.write(item);
+  });
+}
 
 //Cambiar el estado, al momento de ser enviado el mensaje a los consumidores!
 function checkItems(items) {

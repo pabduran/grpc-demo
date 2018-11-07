@@ -3,12 +3,13 @@ syntax = "proto3";
 package cencosud;
 
 service Items {
-    //Define que el consumidor podrá recibir constamente mensajes del server.
-    rpc join(Consumer) returns (stream Message){}
-
+    
     //Define que la comunicación entre servidor y cliente es de manera sincronica. 
     //El consumidor gatilla una pregunta y server envía la respuesta a su consulta.
     rpc consultaItem(Id) returns (Message){}
+    
+    //Define que el consumidor podrá recibir constamente mensajes del server.
+    rpc join(Consumer) returns (stream Message){}
 
     /****************************
     Existen más estrategias de comunicación que son definidas en la siguiente URL:

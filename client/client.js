@@ -33,11 +33,18 @@ let client = new proto.cencosud.Items(
   grpc.credentials.createInsecure()
 );
 
+//Registra el nombre del consumidor en el Server
+rl.question("Nombre del Consumidor >> ", res => {
+  consumerName = res;
+  //Iniciar el stream
+  startGrpc();
+});
+
 //Iniciar stream entre server y client
 function startGrpc() {
   //Cliente se conecta con server
   let channel = client.join({ name: consumerName });
-  channel.on("data", onData);
+  channel.on("data", receiveData);
   
   rl.on("line", function(text) {
     //Petición sincronica. 
@@ -55,17 +62,11 @@ function startGrpc() {
   });
 }
 
+
 //Listener hacia el server. Cada mensaje que es enviado del server cae a esta función.
-function onData(message) {
+function receiveData(message) {
   console.log("\n**************************************")
   console.log("Respuesta ASYNC!");
   console.log(message);
   console.log("**************************************\n")
 }
-
-//Registra el nombre del consumidor en el Server
-rl.question("Nombre del Consumidor >> ", res => {
-  consumerName = res;
-  //Iniciar el stream
-  startGrpc();
-});
